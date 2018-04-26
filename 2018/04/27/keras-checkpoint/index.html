@@ -99,20 +99,25 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Melon">
-<meta property="og:url" content="http://yoursite.com/categories/Anomaly-Detection/index.html">
+  <meta name="description" content="紀錄如何在 Keras model 中使用 checkpoint">
+<meta name="keywords" content="Keras">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Keras 使用 Checkpoint">
+<meta property="og:url" content="http://yoursite.com/2018/04/27/keras-checkpoint/index.html">
 <meta property="og:site_name" content="Melon">
+<meta property="og:description" content="紀錄如何在 Keras model 中使用 checkpoint">
 <meta property="og:locale" content="zh-tw">
+<meta property="og:updated_time" content="2018-04-26T18:20:23.173Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Melon">
+<meta name="twitter:title" content="Keras 使用 Checkpoint">
+<meta name="twitter:description" content="紀錄如何在 Keras model 中使用 checkpoint">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/categories/Anomaly-Detection/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/04/27/keras-checkpoint/"/>
 
 
 
@@ -122,7 +127,7 @@
   };
 </script>
 
-  <title>Category: Anomaly Detection | Melon</title>
+  <title>Keras 使用 Checkpoint | Melon</title>
   
 
 
@@ -169,7 +174,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -239,7 +244,7 @@
         
           
   
-  <li class="menu-item menu-item-categories menu-item-active">
+  <li class="menu-item menu-item-categories">
     <a href="/categories/" rel="section">
       <i class="menu-item-icon fa fa-fw fa-th"></i> <br />Categories</a>
 </li>
@@ -284,85 +289,215 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block category">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>Anomaly Detection<small>Category</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
+
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/27/keras-checkpoint/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/melon.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Melon">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/04/25/IsolationForest/" itemprop="url">
-              
-                <span itemprop="name">Anomaly Detection - Isolation Forest</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">Keras 使用 Checkpoint
+              
+            
+          </h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-25T16:51:50+08:00"
-              content="2018-04-25" >
-          04-25
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+                
+            
 
-    </header>
-  </article>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-27T01:06:07+08:00">2018-04-27</time>
+            
 
+            
+            
+              
+                
+              
+            
+
+            
+              
+              <span class="post-meta-divider">|</span>
+              
+
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified:</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2018-04-27T02:20:23+08:00">2018-04-27</time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Keras/" itemprop="url" rel="index"><span itemprop="name">Keras</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>紀錄如何在 Keras model 中使用 checkpoint<br><a id="more"></a></p>
+<h1 id="官方文檔"><a href="#官方文檔" class="headerlink" title="官方文檔"></a>官方文檔</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">keras.callbacks.ModelCheckpoint(filepath, monitor=<span class="string">'val_loss'</span>, verbose=<span class="number">0</span>,</span><br><span class="line">save_best_only=<span class="keyword">False</span>, save_weights_only=<span class="keyword">False</span>, mode=<span class="string">'auto'</span>, period=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>filepath : 保存的路徑</li>
+<li>monitor : 根據哪個值來決定，預設是’val_loss’，可自行改為’val_acc’等等</li>
+<li>save_best_only : 預設為False，若設為True則會記錄最好的那個model</li>
+<li>mode : 可以設定為 ‘max’ 或 ‘min’，用於當 save_best_only=True 時決定哪個是最好的判斷標準，如使用 ‘val_acc’ 時就選擇為 ‘max’</li>
+<li>save_weights_only : 預設 False，會儲存整個模型架構和參數</li>
+<li>period : 每隔幾個 epoch 檢查一次 checkpoint 動作</li>
+</ul>
+<h1 id="實際操作"><a href="#實際操作" class="headerlink" title="實際操作"></a>實際操作</h1><p>例如以 val_acc 作為判斷標準，每3個 epoch 都會存一次 model (不論好壞)<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> keras.callbacks <span class="keyword">import</span> ModelCheckpoint</span><br><span class="line"></span><br><span class="line">file_path = <span class="string">'model_&#123;epoch:02d&#125;_&#123;val_acc:.2f&#125;.h5'</span></span><br><span class="line">checkpoint = ModelCheckpoint(file_path, monitor=<span class="string">'val_acc'</span>,</span><br><span class="line">save_best_only=<span class="keyword">False</span>, mode=<span class="string">'max'</span>, period=<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">callbacks_list = [checkpoint]</span><br><span class="line">model.fit(..., callbacks=callbacks_list)</span><br></pre></td></tr></table></figure></p>
+<p>其中 filepath 這個變數有支援格式化的字串，例如這樣寫的話可以儲存第幾輪以及該輪的 val_acc是多少，方便記錄 model ，例如:<br>第15輪 model 的 val_acc 為 0.78 -&gt; 檔名即為 model_15_0.78.h5</p>
 
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Keras/" rel="tag"># Keras</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/25/IsolationForest/" rel="next" title="Anomaly Detection - Isolation Forest">
+                <i class="fa fa-chevron-left"></i> Anomaly Detection - Isolation Forest
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -383,8 +518,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -470,6 +614,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#官方文檔"><span class="nav-number">1.</span> <span class="nav-text">官方文檔</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#實際操作"><span class="nav-number">2.</span> <span class="nav-text">實際操作</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -606,6 +766,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.1.0"></script>
+
+
 
   
 
