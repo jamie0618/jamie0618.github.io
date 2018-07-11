@@ -100,12 +100,12 @@
 
 
   <meta property="og:type" content="website">
-<meta property="og:title" content="Melonnn">
+<meta property="og:title" content="Melon">
 <meta property="og:url" content="http://yoursite.com/index.html">
-<meta property="og:site_name" content="Melonnn">
+<meta property="og:site_name" content="Melon">
 <meta property="og:locale" content="zh-tw">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Melonnn">
+<meta name="twitter:title" content="Melon">
 
 
 
@@ -122,7 +122,7 @@
   };
 </script>
 
-  <title>Melonnn</title>
+  <title>Melon</title>
   
 
 
@@ -181,7 +181,7 @@
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Melonnn</span>
+        <span class="site-title">Melon</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -305,7 +305,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/10/Linear-Regression/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/10/Linear-Model/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jack Wang">
@@ -314,7 +314,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Melonnn">
+      <meta itemprop="name" content="Melon">
     </span>
 
     
@@ -324,8 +324,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/10/Linear-Regression/" itemprop="url">
-                  Linear Regression
+                <a class="post-title-link" href="/2018/07/10/Linear-Model/" itemprop="url">
+                  Linear Model
                 </a>
               
             
@@ -345,7 +345,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-10T15:59:46+08:00">2018-07-10</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-10T22:32:18+08:00">2018-07-10</time>
             
 
             
@@ -366,7 +366,7 @@
               
                 <span class="post-meta-item-text">Post modified:</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2018-07-10T18:35:12+08:00">2018-07-10</time>
+              <time title="Post modified" itemprop="dateModified" datetime="2018-07-12T01:00:48+08:00">2018-07-12</time>
             
           </span>
 
@@ -417,10 +417,10 @@
 
       
         
-          <p>線性迴歸 - Linear Regression<br>
+          <p>本篇介紹線性模型，包含 linear regression 以及 logistic regression<br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/07/10/Linear-Regression/#more" rel="contents">
+            <a class="btn" href="/2018/07/10/Linear-Model/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -485,7 +485,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Melonnn">
+      <meta itemprop="name" content="Melon">
     </span>
 
     
@@ -656,7 +656,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Melonnn">
+      <meta itemprop="name" content="Melon">
     </span>
 
     
@@ -827,7 +827,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Melonnn">
+      <meta itemprop="name" content="Melon">
     </span>
 
     
@@ -998,7 +998,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Melonnn">
+      <meta itemprop="name" content="Melon">
     </span>
 
     
@@ -1393,24 +1393,7 @@
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.1.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.1.0"></script>
 
 
 
@@ -1460,6 +1443,8 @@
   
     
       
+        
+      
     
       
     
@@ -1471,6 +1456,46 @@
     
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+    
   
 
 

@@ -99,25 +99,30 @@
 
 
 
-  <meta name="description" content="紀錄如何在 Keras model 中使用 checkpoint">
-<meta name="keywords" content="Keras">
+  <meta name="description" content="本篇介紹線性模型，包含 linear regression 以及 logistic regression">
+<meta name="keywords" content="ML">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Keras 使用 Checkpoint">
-<meta property="og:url" content="http://yoursite.com/2018/04/27/keras-checkpoint/index.html">
+<meta property="og:title" content="Linear Model">
+<meta property="og:url" content="http://yoursite.com/2018/07/10/Linear-Model/index.html">
 <meta property="og:site_name" content="Melon">
-<meta property="og:description" content="紀錄如何在 Keras model 中使用 checkpoint">
+<meta property="og:description" content="本篇介紹線性模型，包含 linear regression 以及 logistic regression">
 <meta property="og:locale" content="zh-tw">
-<meta property="og:updated_time" content="2018-04-26T18:20:23.173Z">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Linear-Model/1.PNG">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Linear-Model/2.PNG">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Linear-Model/3.PNG">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Linear-Model/4.PNG">
+<meta property="og:updated_time" content="2018-07-11T17:00:48.700Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Keras 使用 Checkpoint">
-<meta name="twitter:description" content="紀錄如何在 Keras model 中使用 checkpoint">
+<meta name="twitter:title" content="Linear Model">
+<meta name="twitter:description" content="本篇介紹線性模型，包含 linear regression 以及 logistic regression">
+<meta name="twitter:image" content="http://yoursite.com/2018/07/10/Linear-Model/1.PNG">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/04/27/keras-checkpoint/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/07/10/Linear-Model/"/>
 
 
 
@@ -127,7 +132,7 @@
   };
 </script>
 
-  <title>Keras 使用 Checkpoint | Melon</title>
+  <title>Linear Model | Melon</title>
   
 
 
@@ -309,7 +314,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/27/keras-checkpoint/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/10/Linear-Model/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jack Wang">
@@ -326,7 +331,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Keras 使用 Checkpoint
+          <h1 class="post-title" itemprop="name headline">Linear Model
               
             
           </h1>
@@ -345,7 +350,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-27T01:06:07+08:00">2018-04-27</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-10T22:32:18+08:00">2018-07-10</time>
             
 
             
@@ -366,7 +371,7 @@
               
                 <span class="post-meta-item-text">Post modified:</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2018-04-27T02:20:23+08:00">2018-04-27</time>
+              <time title="Post modified" itemprop="dateModified" datetime="2018-07-12T01:00:48+08:00">2018-07-12</time>
             
           </span>
 
@@ -382,7 +387,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Keras/" itemprop="url" rel="index"><span itemprop="name">Keras</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ML/" itemprop="url" rel="index"><span itemprop="name">ML</span></a></span>
 
                 
                 
@@ -416,18 +421,20 @@
       
 
       
-        <p>紀錄如何在 Keras model 中使用 checkpoint<br><a id="more"></a></p>
-<h1 id="官方文檔"><a href="#官方文檔" class="headerlink" title="官方文檔"></a>官方文檔</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">keras.callbacks.ModelCheckpoint(filepath, monitor=<span class="string">'val_loss'</span>, verbose=<span class="number">0</span>,</span><br><span class="line">save_best_only=<span class="keyword">False</span>, save_weights_only=<span class="keyword">False</span>, mode=<span class="string">'auto'</span>, period=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-<ul>
-<li>filepath : 保存的路徑</li>
-<li>monitor : 根據哪個值來決定，預設是’val_loss’，可自行改為’val_acc’等等</li>
-<li>save_best_only : 預設為False，若設為True則會記錄最好的那個model</li>
-<li>mode : 可以設定為 ‘max’ 或 ‘min’，用於當 save_best_only=True 時決定哪個是最好的判斷標準，如使用 ‘val_acc’ 時就選擇為 ‘max’</li>
-<li>save_weights_only : 預設 False，會儲存整個模型架構和參數</li>
-<li>period : 每隔幾個 epoch 檢查一次 checkpoint 動作</li>
-</ul>
-<h1 id="實際操作"><a href="#實際操作" class="headerlink" title="實際操作"></a>實際操作</h1><p>例如以 val_acc 作為判斷標準，每3個 epoch 都會存一次 model (不論好壞)<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> keras.callbacks <span class="keyword">import</span> ModelCheckpoint</span><br><span class="line"></span><br><span class="line">file_path = <span class="string">'model_&#123;epoch:02d&#125;_&#123;val_acc:.2f&#125;.h5'</span></span><br><span class="line">checkpoint = ModelCheckpoint(file_path, monitor=<span class="string">'val_acc'</span>,</span><br><span class="line">save_best_only=<span class="keyword">False</span>, mode=<span class="string">'max'</span>, period=<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">callbacks_list = [checkpoint]</span><br><span class="line">model.fit(..., callbacks=callbacks_list)</span><br></pre></td></tr></table></figure></p>
-<p>其中 filepath 這個變數有支援格式化的字串，例如這樣寫的話可以儲存第幾輪以及該輪的 val_acc是多少，方便記錄 model ，例如:<br>第15輪 model 的 val_acc 為 0.78 -&gt; 檔名即為 model_15_0.78.h5</p>
+        <p>本篇介紹線性模型，包含 linear regression 以及 logistic regression<br><a id="more"></a></p>
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>線性模型屬於監督式學習的一種，假定原始資料中共有 d 個 feature，即一筆資料 $ x = (x_1, x_2, …, x_d) $ ，則一個最基本的線性模型試圖用一個所有feature的線性組合來描述我們想要預測的目標。<br>$$ f(x) = w_1x_1 + w_2x_2 + … + w_dx_d + b $$<br>$$ 使得 f(x_i) \simeq y_i $$<br>用向量形式可寫為: $ f(x) = W^Tx + b $<br>其中所要學習的就是 w 和 b 的值，線性模型較為基礎簡單，但好處是有非常好的可解釋性質，根據每個feature對應的 w ，能很好的判斷哪個feature較重要。</p>
+<h1 id="Linear-Regression"><a href="#Linear-Regression" class="headerlink" title="Linear Regression"></a>Linear Regression</h1><h2 id="Introduction-1"><a href="#Introduction-1" class="headerlink" title="Introduction"></a>Introduction</h2><p>Linear Regression利用線性模型，來解決regression的問題，如下圖所示，假設每筆資料包含2個feature ($x_1, x_2$)，則這兩維度和目標y形成的三維空間中，找到的線性模型為一個平面，目標是讓這個平面越符合y的分佈越好，也就是讓所有資料點的y到這個平面的總距離和越小越好(找到一個平面能讓下圖中的紅線總和有最小值)。</p>
+<p><img src="1.PNG" alt=""></p>
+<h2 id="Loss-Function-MSE"><a href="#Loss-Function-MSE" class="headerlink" title="Loss Function - MSE"></a>Loss Function - MSE</h2><p>最常見計算這個總距離和(錯誤程度)的方法為 Mean Squared Error (MSE)，假設有N筆資料:<br>$$ MSE = \frac{1}{N} \sum_{n=1}^N (f(x_n)-y_n)^2 $$<br>以MSE當作模型的loss function，要學習的目標就是讓這個loss function能盡量越小越好。<br>至於如何minimize這個loss function，主要有兩個方法可以選擇: </p>
+<ol>
+<li>closed form solution</li>
+<li>gradient descent </li>
+</ol>
+<h2 id="Closed-Form-Solution"><a href="#Closed-Form-Solution" class="headerlink" title="Closed Form Solution"></a>Closed Form Solution</h2><p>closed form solution利用矩陣的運算來直接求得最佳解，前面的介紹中，模型是由 w 跟 b 係數所構成的 :<br>$$ f(x) = W^Tx + b $$<br>這邊為了計算方便，將式子中的 b 當作是 w0，而對應的 x0 為1:<br>也就是將 $ f(x) = w_1x_1 + w_2x_2 + … + w_dx_d + b $<br>改寫為 $ f(x) = w_1x_1 + w_2x_2 + … + w_dx_d + w_0x_0 $ 其中 $w_0=b, x_0=1$<br>而預測的式子寫為 $ f(x) = W^Tx $<br>目標是 minimize $ E(W) = \frac{1}{N} \Vert{XW - y}\Vert^2$</p>
+<p>要minimize E(W)，所要找的為 E(W)對W微分等於0的地方，這個地方會出現極小值，所以具體解法就是用矩陣的運算，找出 $\nabla E(W) = 0$ 的解。</p>
+<p><img src="2.PNG" alt=""><br>將E(W)展開之後，將不是W的地方先以A 、 b 、 c三個部分來表示，接著再對W取微分</p>
+<p><img src="3.PNG" alt=""></p>
+<p>最後可以得到 E(W) 對 W 微分的梯度，能讓這個式子=0的W就是我們要找的目標<br><img src="4.PNG" alt=""></p>
 
       
     </div>
@@ -448,7 +455,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Keras/" rel="tag"># Keras</a>
+            <a href="/tags/ML/" rel="tag"># ML</a>
           
         </div>
       
@@ -461,8 +468,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/25/IsolationForest/" rel="next" title="Anomaly Detection - Isolation Forest">
-                <i class="fa fa-chevron-left"></i> Anomaly Detection - Isolation Forest
+              <a href="/2018/05/30/PIL/" rel="next" title="PIL">
+                <i class="fa fa-chevron-left"></i> PIL
               </a>
             
           </div>
@@ -470,10 +477,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/05/30/PIL/" rel="prev" title="PIL">
-                PIL <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -636,7 +639,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#官方文檔"><span class="nav-number">1.</span> <span class="nav-text">官方文檔</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#實際操作"><span class="nav-number">2.</span> <span class="nav-text">實際操作</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linear-Regression"><span class="nav-number">2.</span> <span class="nav-text">Linear Regression</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-1"><span class="nav-number">2.1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Loss-Function-MSE"><span class="nav-number">2.2.</span> <span class="nav-text">Loss Function - MSE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Closed-Form-Solution"><span class="nav-number">2.3.</span> <span class="nav-text">Closed Form Solution</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -786,24 +789,7 @@
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.1.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.1.0"></script>
 
 
 
@@ -852,6 +838,46 @@
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+    
   
 
 
