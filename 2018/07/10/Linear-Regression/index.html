@@ -99,18 +99,25 @@
 
 
 
-  <meta name="description" content="線性迴歸 - Linear Regression">
+  <meta name="description" content="本篇介紹 Linear Regression">
 <meta name="keywords" content="ML">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linear Regression">
 <meta property="og:url" content="http://yoursite.com/2018/07/10/Linear-Regression/index.html">
-<meta property="og:site_name" content="Melonnn">
-<meta property="og:description" content="線性迴歸 - Linear Regression">
+<meta property="og:site_name" content="Melon">
+<meta property="og:description" content="本篇介紹 Linear Regression">
 <meta property="og:locale" content="zh-tw">
-<meta property="og:updated_time" content="2018-07-10T10:35:12.004Z">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Linear-Regression/1.PNG">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Linear-Regression/2.PNG">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Linear-Regression/3.PNG">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Linear-Regression/4.PNG">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Linear-Regression/5.PNG">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Linear-Regression/6.PNG">
+<meta property="og:updated_time" content="2018-07-14T08:50:44.504Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linear Regression">
-<meta name="twitter:description" content="線性迴歸 - Linear Regression">
+<meta name="twitter:description" content="本篇介紹 Linear Regression">
+<meta name="twitter:image" content="http://yoursite.com/2018/07/10/Linear-Regression/1.PNG">
 
 
 
@@ -127,7 +134,7 @@
   };
 </script>
 
-  <title>Linear Regression | Melonnn</title>
+  <title>Linear Regression | Melon</title>
   
 
 
@@ -185,7 +192,7 @@
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Melonnn</span>
+        <span class="site-title">Melon</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -318,7 +325,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Melonnn">
+      <meta itemprop="name" content="Melon">
     </span>
 
     
@@ -345,7 +352,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-10T15:59:46+08:00">2018-07-10</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-10T22:32:18+08:00">2018-07-10</time>
             
 
             
@@ -366,7 +373,7 @@
               
                 <span class="post-meta-item-text">Post modified:</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2018-07-10T18:35:12+08:00">2018-07-10</time>
+              <time title="Post modified" itemprop="dateModified" datetime="2018-07-14T16:50:44+08:00">2018-07-14</time>
             
           </span>
 
@@ -416,9 +423,43 @@
       
 
       
-        <p>線性迴歸 - Linear Regression<br><a id="more"></a></p>
-<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>線性回歸屬於監督式學習的一種，用於解決regression的問題，假定原始資料中共有 d 個 feature，即一筆資料 $ x = (x_1, x_2, …, x_d) $ ，</p>
-<p>Simple inline $a = b + c$</p>
+        <p>本篇介紹 Linear Regression<br><a id="more"></a></p>
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>線性模型屬於監督式學習的一種，假定原始資料中共有 d 個 feature，即一筆資料 $ x = (x_1, x_2, …, x_d) $ ，則一個最基本的線性模型試圖用一個所有feature的線性組合來描述我們想要預測的目標。<br>$$ f(x) = w_1x_1 + w_2x_2 + … + w_dx_d + b $$<br>$$ 使得 f(x_i) \simeq y_i $$<br>用向量形式可寫為: $ f(x) = W^Tx + b $<br>其中所要學習的就是 w 和 b 的值，線性模型較為基礎簡單，但好處是有非常好的可解釋性質，根據每個feature對應的 w ，能很好的判斷哪個feature較重要。</p>
+<p>Linear Regression利用線性模型，來解決regression的問題，如下圖所示，假設每筆資料包含2個feature ($x_1, x_2$)，則這兩維度和目標y形成的三維空間中，找到的線性模型為一個平面，目標是讓這個平面越符合y的分佈越好，也就是讓所有資料點的y到這個平面的總距離和越小越好(找到一個平面能讓下圖中的紅線總和有最小值)。</p>
+<p><img src="1.PNG" alt=""></p>
+<h1 id="Loss-Function-MSE"><a href="#Loss-Function-MSE" class="headerlink" title="Loss Function - MSE"></a>Loss Function - MSE</h1><p>最常見計算這個總距離和(錯誤程度)的方法為 Mean Squared Error (MSE)，假設有N筆資料:<br>$$ MSE = \frac{1}{N} \sum_{n=1}^N (f(x_n)-y_n)^2 $$<br>以MSE當作模型的loss function，要學習的目標就是讓這個loss function能盡量越小越好。<br>至於如何minimize這個loss function，主要有兩個方法可以選擇: </p>
+<ol>
+<li>closed form solution</li>
+<li>gradient descent </li>
+</ol>
+<p>以linear regression來說，這兩種方法都能找到最佳解，林軒田教授上課時是教 1 ，而李宏毅、吳恩達教授的課程內容則是教 2，而python sklearn當中，linear regression 使用的方法是以 1 來解，至於為什麼會有這個差異，參考網路上的討論，大多人認為因為closed form solution只能用在linear regression上，而gradient descent除了linear regression之外，後面教的logistic regression和神經網路也都會用到，因此兩位教授的教學內容才會選擇直接教gradient descent，畢竟gradient descent也可以解linear regression的，不過在實際應用上，如果要解linear regression，通常還是以closed form solution來解較有效率。</p>
+<h1 id="Closed-Form-Solution"><a href="#Closed-Form-Solution" class="headerlink" title="Closed Form Solution"></a>Closed Form Solution</h1><p>closed form solution利用矩陣的運算來直接求得最佳解，前面的介紹中，模型是由 w 跟 b 係數所構成的 :<br>$$ f(x) = W^Tx + b $$<br>這邊為了計算方便，將式子中的 b 當作是 w0，而對應的 x0 為1:<br>也就是將 $ f(x) = w_1x_1 + w_2x_2 + … + w_dx_d + b $<br>改寫為 $ f(x) = w_1x_1 + w_2x_2 + … + w_dx_d + w_0x_0 $ 其中 $w_0=b, x_0=1$<br>而預測的式子寫為 $ f(x) = W^Tx $<br>目標是 minimize $ E(W) = \frac{1}{N} \Vert{XW - y}\Vert^2$</p>
+<p>要minimize E(W)，所要找的為 E(W)對W微分等於0的地方，這個地方會出現極小值，所以具體解法就是用矩陣的運算，找出 $\nabla E(W) = 0$ 的解。</p>
+<p><img src="2.PNG" alt=""><br>將E(W)展開之後，將不是W的地方先以A 、 b 、 c三個部分來表示，接著再對W取微分</p>
+<p><img src="3.PNG" alt=""></p>
+<p>最後可以得到 E(W) 對 W 微分的梯度，能讓這個式子=0的W就是我們要找的目標<br><img src="4.PNG" alt=""></p>
+<p>因此，最後的closed form solution為<br>$$ X^TXW = X^Ty $$<br>其中的X為資料feature矩陣，假設共N筆資料，每筆資料有M個feature，則X就是一個N*M的矩陣<br>y則是一個vector，為對應的regression目標<br>X、y都是已知的，以此function就能解出最佳解W</p>
+<p>解此function的解法很多種，可以直接以inverse matrix來解，如下圖<br><img src="5.PNG" alt=""></p>
+<p>但此解法的問題在於 $X^TX$ 要確定是可逆的，並且當N很大時，做inverse matrix相對來說cost很大，參考網路上的討論，建議使用QR分解、SVD等等的計算方式來解此function，會比起直接計算inverse matrix來的有效。</p>
+<h1 id="Gradient-Descent"><a href="#Gradient-Descent" class="headerlink" title="Gradient Descent"></a>Gradient Descent</h1><p>根據loss function:<br>$$ MSE = \frac{1}{N} \sum_{n=1}^N (f(x_n)-y_n)^2 = \frac{1}{N} \sum_{n=1}^N (Wx_n-y_n)^2 $$</p>
+<p>如果以 W 跟 loss function 作圖，gradient descent的概念就是對於 W 做微分，得到的值會是該點的斜率，而斜率是負的時候表示W該往右邊移動(加大)，斜率是正的時候表示W該往左邊移動(縮小)，不斷更新W之後最後盡量找到斜率=0的地方，不過這種找法有可能找到的是local minimum而不是global minimum，如下圖。<br><img src="6.PNG" alt=""></p>
+<p>更新的步驟如下:</p>
+<ol>
+<li>隨機選擇W初始化的值</li>
+<li>計算此時對W微分的loss梯度</li>
+<li>更新 $W \leftarrow W - \eta*梯度 $ </li>
+<li>重複2、3直到一定的次數，或是當第2步驟算出來的梯度為0即可停止</li>
+</ol>
+<h1 id="Python-Sklearn實作方式"><a href="#Python-Sklearn實作方式" class="headerlink" title="Python Sklearn實作方式"></a>Python Sklearn實作方式</h1><p>在python sklearn中，linear regression是以closed form solution來解的，細節可以參考reference第4點，主要是sklearn會調用scipy.linalg.lstsq()來解，而此function再調用C語言Linear Algebra Package中的function，用singular value decomposition(SVD) of A and a divide and conquer method來解這個linear regression問題。</p>
+<p>也就是在實際應用上，linear regression還是以closed form solution來解會較有效率。</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol>
+<li><a href="https://stats.stackexchange.com/questions/160179/do-we-need-gradient-descent-to-find-the-coefficients-of-a-linear-regression-mode" target="_blank" rel="noopener">Do we need gradient descent to find the coefficients of a linear regression model</a></li>
+<li><a href="https://stats.stackexchange.com/questions/1829/what-algorithm-is-used-in-linear-regression" target="_blank" rel="noopener">What algorithm is used in linear regression?</a></li>
+<li><a href="https://stats.stackexchange.com/questions/278755/why-use-gradient-descent-for-linear-regression-when-a-closed-form-math-solution/278794" target="_blank" rel="noopener">Why use gradient descent for linear regression, when a closed-form math solution is available?</a></li>
+<li><a href="https://blog.csdn.net/ybdesire/article/details/67701289" target="_blank" rel="noopener">sklearn中LinearRegression source code解析</a></li>
+<li>林軒田 - 機器學習基石</li>
+<li>李宏毅 - 機器學習</li>
+</ol>
 
       
     </div>
@@ -452,8 +493,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/30/PIL/" rel="next" title="PIL">
-                <i class="fa fa-chevron-left"></i> PIL
+              <a href="/2018/04/27/keras-callbacks/" rel="next" title="Keras Callbacks 紀錄">
+                <i class="fa fa-chevron-left"></i> Keras Callbacks 紀錄
               </a>
             
           </div>
@@ -461,6 +502,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/14/Logistic-Regression/" rel="prev" title="Logistic Regression">
+                Logistic Regression <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -557,9 +602,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-count">3</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -576,9 +619,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-count">2</span>
                     <span class="site-state-item-name">tags</span>
                   
                 </div>
@@ -623,7 +664,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Loss-Function-MSE"><span class="nav-number">2.</span> <span class="nav-text">Loss Function - MSE</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Closed-Form-Solution"><span class="nav-number">3.</span> <span class="nav-text">Closed Form Solution</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Gradient-Descent"><span class="nav-number">4.</span> <span class="nav-text">Gradient Descent</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Python-Sklearn實作方式"><span class="nav-number">5.</span> <span class="nav-text">Python Sklearn實作方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">6.</span> <span class="nav-text">Reference</span></a></li></ol></div>
             
 
           </div>
@@ -773,24 +814,7 @@
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.1.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.1.0"></script>
 
 
 
@@ -839,6 +863,46 @@
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+    
   
 
 
