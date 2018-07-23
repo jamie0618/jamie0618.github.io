@@ -113,7 +113,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/07/10/Linear-Regression/4.PNG">
 <meta property="og:image" content="http://yoursite.com/2018/07/10/Linear-Regression/5.PNG">
 <meta property="og:image" content="http://yoursite.com/2018/07/10/Linear-Regression/6.PNG">
-<meta property="og:updated_time" content="2018-07-14T08:50:44.504Z">
+<meta property="og:updated_time" content="2018-07-23T10:34:19.538Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linear Regression">
 <meta name="twitter:description" content="本篇介紹 Linear Regression">
@@ -373,7 +373,7 @@
               
                 <span class="post-meta-item-text">Post modified:</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2018-07-14T16:50:44+08:00">2018-07-14</time>
+              <time title="Post modified" itemprop="dateModified" datetime="2018-07-23T18:34:19+08:00">2018-07-23</time>
             
           </span>
 
@@ -433,7 +433,7 @@
 <li>gradient descent </li>
 </ol>
 <p>以linear regression來說，這兩種方法都能找到最佳解，林軒田教授上課時是教 1 ，而李宏毅、吳恩達教授的課程內容則是教 2，而python sklearn當中，linear regression 使用的方法是以 1 來解，至於為什麼會有這個差異，參考網路上的討論，大多人認為因為closed form solution只能用在linear regression上，而gradient descent除了linear regression之外，後面教的logistic regression和神經網路也都會用到，因此兩位教授的教學內容才會選擇直接教gradient descent，畢竟gradient descent也可以解linear regression的，不過在實際應用上，如果要解linear regression，通常還是以closed form solution來解較有效率。</p>
-<h1 id="Closed-Form-Solution"><a href="#Closed-Form-Solution" class="headerlink" title="Closed Form Solution"></a>Closed Form Solution</h1><p>closed form solution利用矩陣的運算來直接求得最佳解，前面的介紹中，模型是由 w 跟 b 係數所構成的 :<br>$$ f(x) = W^Tx + b $$<br>這邊為了計算方便，將式子中的 b 當作是 w0，而對應的 x0 為1:<br>也就是將 $ f(x) = w_1x_1 + w_2x_2 + … + w_dx_d + b $<br>改寫為 $ f(x) = w_1x_1 + w_2x_2 + … + w_dx_d + w_0x_0 $ 其中 $w_0=b, x_0=1$<br>而預測的式子寫為 $ f(x) = W^Tx $<br>目標是 minimize $ E(W) = \frac{1}{N} \Vert{XW - y}\Vert^2$</p>
+<h1 id="Closed-Form-Solution"><a href="#Closed-Form-Solution" class="headerlink" title="Closed Form Solution"></a>Closed Form Solution</h1><p>closed form solution利用矩陣的運算來直接求得最佳解，前面的介紹中，模型是由 w 跟 b 係數所構成的 :<br>$$ f(x) = w^Tx + b $$<br>這邊為了計算方便，將式子中的 b 當作是 w0，而對應的 x0 為1:<br>也就是將 $ f(x) = w_1x_1 + w_2x_2 + … + w_dx_d + b $<br>改寫為 $ f(x) = w_1x_1 + w_2x_2 + … + w_dx_d + w_0x_0 $ 其中 $w_0=b, x_0=1$<br>而預測的式子寫為 $ f(x) = w^Tx $<br>目標是 minimize $ E(W) = \frac{1}{N} \Vert{XW - y}\Vert^2$</p>
 <p>要minimize E(W)，所要找的為 E(W)對W微分等於0的地方，這個地方會出現極小值，所以具體解法就是用矩陣的運算，找出 $\nabla E(W) = 0$ 的解。</p>
 <p><img src="2.PNG" alt=""><br>將E(W)展開之後，將不是W的地方先以A 、 b 、 c三個部分來表示，接著再對W取微分</p>
 <p><img src="3.PNG" alt=""></p>
