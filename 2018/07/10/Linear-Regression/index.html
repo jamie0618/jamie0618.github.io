@@ -113,7 +113,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/07/10/Linear-Regression/4.PNG">
 <meta property="og:image" content="http://yoursite.com/2018/07/10/Linear-Regression/5.PNG">
 <meta property="og:image" content="http://yoursite.com/2018/07/10/Linear-Regression/6.PNG">
-<meta property="og:updated_time" content="2018-07-23T10:34:19.538Z">
+<meta property="og:updated_time" content="2018-08-12T09:20:44.285Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linear Regression">
 <meta name="twitter:description" content="本篇介紹 Linear Regression">
@@ -373,7 +373,7 @@
               
                 <span class="post-meta-item-text">Post modified:</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2018-07-23T18:34:19+08:00">2018-07-23</time>
+              <time title="Post modified" itemprop="dateModified" datetime="2018-08-12T17:20:44+08:00">2018-08-12</time>
             
           </span>
 
@@ -450,6 +450,7 @@
 <li>更新 $W \leftarrow W - \eta*梯度 $ </li>
 <li>重複2、3直到一定的次數，或是當第2步驟算出來的梯度為0即可停止</li>
 </ol>
+<p>注意在2、3步驟更新時，必須要針對全部的w都計算完loss gradient，再去更新w的值，而不能算完一個gradient舊更新一個w。</p>
 <h1 id="Python-Sklearn實作方式"><a href="#Python-Sklearn實作方式" class="headerlink" title="Python Sklearn實作方式"></a>Python Sklearn實作方式</h1><p>在python sklearn中，linear regression是以closed form solution來解的，細節可以參考reference第4點，主要是sklearn會調用scipy.linalg.lstsq()來解，而此function再調用C語言Linear Algebra Package中的function，用singular value decomposition(SVD) of A and a divide and conquer method來解這個linear regression問題。</p>
 <p>也就是在實際應用上，linear regression還是以closed form solution來解會較有效率。</p>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol>
