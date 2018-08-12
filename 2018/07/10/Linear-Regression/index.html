@@ -99,13 +99,13 @@
 
 
 
-  <meta name="description" content="本篇介紹 Linear Regression">
+  <meta name="description" content="Linear Regression 是利用線性模型來解決 regression 問題的一種方法。">
 <meta name="keywords" content="ML">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linear Regression">
 <meta property="og:url" content="http://yoursite.com/2018/07/10/Linear-Regression/index.html">
 <meta property="og:site_name" content="Melon">
-<meta property="og:description" content="本篇介紹 Linear Regression">
+<meta property="og:description" content="Linear Regression 是利用線性模型來解決 regression 問題的一種方法。">
 <meta property="og:locale" content="zh-tw">
 <meta property="og:image" content="http://yoursite.com/2018/07/10/Linear-Regression/1.PNG">
 <meta property="og:image" content="http://yoursite.com/2018/07/10/Linear-Regression/2.PNG">
@@ -113,10 +113,10 @@
 <meta property="og:image" content="http://yoursite.com/2018/07/10/Linear-Regression/4.PNG">
 <meta property="og:image" content="http://yoursite.com/2018/07/10/Linear-Regression/5.PNG">
 <meta property="og:image" content="http://yoursite.com/2018/07/10/Linear-Regression/6.PNG">
-<meta property="og:updated_time" content="2018-08-12T09:20:44.285Z">
+<meta property="og:updated_time" content="2018-08-12T16:35:36.582Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linear Regression">
-<meta name="twitter:description" content="本篇介紹 Linear Regression">
+<meta name="twitter:description" content="Linear Regression 是利用線性模型來解決 regression 問題的一種方法。">
 <meta name="twitter:image" content="http://yoursite.com/2018/07/10/Linear-Regression/1.PNG">
 
 
@@ -373,7 +373,7 @@
               
                 <span class="post-meta-item-text">Post modified:</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2018-08-12T17:20:44+08:00">2018-08-12</time>
+              <time title="Post modified" itemprop="dateModified" datetime="2018-08-13T00:35:36+08:00">2018-08-13</time>
             
           </span>
 
@@ -423,7 +423,7 @@
       
 
       
-        <p>本篇介紹 Linear Regression<br><a id="more"></a></p>
+        <p>Linear Regression 是利用線性模型來解決 regression 問題的一種方法。<br><a id="more"></a></p>
 <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>線性模型屬於監督式學習的一種，假定原始資料中共有 d 個 feature，即一筆資料 $ x = (x_1, x_2, …, x_d) $ ，則一個最基本的線性模型試圖用一個所有feature的線性組合來描述我們想要預測的目標。<br>$$ f(x) = w_1x_1 + w_2x_2 + … + w_dx_d + b $$<br>$$ 使得 f(x_i) \simeq y_i $$<br>用向量形式可寫為: $ f(x) = W^Tx + b $<br>其中所要學習的就是 w 和 b 的值，線性模型較為基礎簡單，但好處是有非常好的可解釋性質，根據每個feature對應的 w ，能很好的判斷哪個feature較重要。</p>
 <p>Linear Regression利用線性模型，來解決regression的問題，如下圖所示，假設每筆資料包含2個feature ($x_1, x_2$)，則這兩維度和目標y形成的三維空間中，找到的線性模型為一個平面，目標是讓這個平面越符合y的分佈越好，也就是讓所有資料點的y到這個平面的總距離和越小越好(找到一個平面能讓下圖中的紅線總和有最小值)。</p>
 <p><img src="1.PNG" alt=""></p>
@@ -432,8 +432,8 @@
 <li>closed form solution</li>
 <li>gradient descent </li>
 </ol>
-<p>以linear regression來說，這兩種方法都能找到最佳解，林軒田教授上課時是教 1 ，而李宏毅、吳恩達教授的課程內容則是教 2，而python sklearn當中，linear regression 使用的方法是以 1 來解，至於為什麼會有這個差異，參考網路上的討論，大多人認為因為closed form solution只能用在linear regression上，而gradient descent除了linear regression之外，後面教的logistic regression和神經網路也都會用到，因此兩位教授的教學內容才會選擇直接教gradient descent，畢竟gradient descent也可以解linear regression的，不過在實際應用上，如果要解linear regression，通常還是以closed form solution來解較有效率。</p>
-<h1 id="Closed-Form-Solution"><a href="#Closed-Form-Solution" class="headerlink" title="Closed Form Solution"></a>Closed Form Solution</h1><p>closed form solution利用矩陣的運算來直接求得最佳解，前面的介紹中，模型是由 w 跟 b 係數所構成的 :<br>$$ f(x) = w^Tx + b $$<br>這邊為了計算方便，將式子中的 b 當作是 w0，而對應的 x0 為1:<br>也就是將 $ f(x) = w_1x_1 + w_2x_2 + … + w_dx_d + b $<br>改寫為 $ f(x) = w_1x_1 + w_2x_2 + … + w_dx_d + w_0x_0 $ 其中 $w_0=b, x_0=1$<br>而預測的式子寫為 $ f(x) = w^Tx $<br>目標是 minimize $ E(W) = \frac{1}{N} \Vert{XW - y}\Vert^2$</p>
+<p>以linear regression來說，這兩種方法都能找到最佳解，林軒田教授上課時是教 1 ，而李宏毅教授的課程內容則是教 2，吳恩達的課程則是1、2都有教，而python sklearn當中，linear regression 使用的方法是以 1 來解，至於為什麼會有這個差異，參考網路上的討論，大多人認為因為closed form solution只能用在linear regression上，而gradient descent除了linear regression之外，後面教的logistic regression和神經網路也都會用到，因此兩位教授的教學內容才會選擇直接教gradient descent，畢竟gradient descent也可以解linear regression的，不過在實際應用上，如果要解linear regression，通常還是以closed form solution來解較有效率。</p>
+<h1 id="Features-Scaling"><a href="#Features-Scaling" class="headerlink" title="Features Scaling"></a>Features Scaling</h1><h1 id="Closed-Form-Solution-Normal-Equation"><a href="#Closed-Form-Solution-Normal-Equation" class="headerlink" title="Closed Form Solution (Normal Equation)"></a>Closed Form Solution (Normal Equation)</h1><p>closed form solution利用矩陣的運算來直接求得最佳解，前面的介紹中，模型是由 w 跟 b 係數所構成的 :<br>$$ f(x) = w^Tx + b $$<br>這邊為了計算方便，將式子中的 b 當作是 w0，而對應的 x0 為1:<br>也就是將 $ f(x) = w_1x_1 + w_2x_2 + … + w_dx_d + b $<br>改寫為 $ f(x) = w_1x_1 + w_2x_2 + … + w_dx_d + w_0x_0 $ 其中 $w_0=b, x_0=1$<br>而預測的式子寫為 $ f(x) = w^Tx $<br>目標是 minimize $ E(W) = \frac{1}{N} \Vert{XW - y}\Vert^2$</p>
 <p>要minimize E(W)，所要找的為 E(W)對W微分等於0的地方，這個地方會出現極小值，所以具體解法就是用矩陣的運算，找出 $\nabla E(W) = 0$ 的解。</p>
 <p><img src="2.PNG" alt=""><br>將E(W)展開之後，將不是W的地方先以A 、 b 、 c三個部分來表示，接著再對W取微分</p>
 <p><img src="3.PNG" alt=""></p>
@@ -451,6 +451,17 @@
 <li>重複2、3直到一定的次數，或是當第2步驟算出來的梯度為0即可停止</li>
 </ol>
 <p>注意在2、3步驟更新時，必須要針對全部的w都計算完loss gradient，再去更新w的值，而不能算完一個gradient舊更新一個w。</p>
+<h1 id="Gradient-Descent-vs-Normal-Equation"><a href="#Gradient-Descent-vs-Normal-Equation" class="headerlink" title="Gradient Descent vs Normal Equation"></a>Gradient Descent vs Normal Equation</h1><p>對於 linear regression 來說，兩種方法都能找到適合的解，而兩者的比較大致如下:</p>
+<h2 id="Gradient-Descent-1"><a href="#Gradient-Descent-1" class="headerlink" title="Gradient Descent"></a>Gradient Descent</h2><ol>
+<li>需要設定適合的 learning rate</li>
+<li>可能需要大量的迭代輪數</li>
+<li>可能卡在 local minimum</li>
+<li>當 feature 維度很大時，會比 normal equation有效率，根據吳恩達教授的建議，通常維度大於10000他就會考慮使用 graident descent 而非 normal equation。</li>
+</ol>
+<h2 id="Normal-Equation"><a href="#Normal-Equation" class="headerlink" title="Normal Equation"></a>Normal Equation</h2><ol>
+<li>不需要考慮 learning rate 和迭代輪數之類的參數</li>
+<li>需計算逆矩陣，如果 feature 維度過大會導致計算非常複雜。</li>
+</ol>
 <h1 id="Python-Sklearn實作方式"><a href="#Python-Sklearn實作方式" class="headerlink" title="Python Sklearn實作方式"></a>Python Sklearn實作方式</h1><p>在python sklearn中，linear regression是以closed form solution來解的，細節可以參考reference第4點，主要是sklearn會調用scipy.linalg.lstsq()來解，而此function再調用C語言Linear Algebra Package中的function，用singular value decomposition(SVD) of A and a divide and conquer method來解這個linear regression問題。</p>
 <p>也就是在實際應用上，linear regression還是以closed form solution來解會較有效率。</p>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol>
@@ -460,6 +471,7 @@
 <li><a href="https://blog.csdn.net/ybdesire/article/details/67701289" target="_blank" rel="noopener">sklearn中LinearRegression source code解析</a></li>
 <li>林軒田 - 機器學習基石</li>
 <li>李宏毅 - 機器學習</li>
+<li>Andrew Ng - ML on coursera</li>
 </ol>
 
       
@@ -665,7 +677,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Loss-Function-MSE"><span class="nav-number">2.</span> <span class="nav-text">Loss Function - MSE</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Closed-Form-Solution"><span class="nav-number">3.</span> <span class="nav-text">Closed Form Solution</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Gradient-Descent"><span class="nav-number">4.</span> <span class="nav-text">Gradient Descent</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Python-Sklearn實作方式"><span class="nav-number">5.</span> <span class="nav-text">Python Sklearn實作方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">6.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Loss-Function-MSE"><span class="nav-number">2.</span> <span class="nav-text">Loss Function - MSE</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Features-Scaling"><span class="nav-number">3.</span> <span class="nav-text">Features Scaling</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Closed-Form-Solution-Normal-Equation"><span class="nav-number">4.</span> <span class="nav-text">Closed Form Solution (Normal Equation)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Gradient-Descent"><span class="nav-number">5.</span> <span class="nav-text">Gradient Descent</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Gradient-Descent-vs-Normal-Equation"><span class="nav-number">6.</span> <span class="nav-text">Gradient Descent vs Normal Equation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Gradient-Descent-1"><span class="nav-number">6.1.</span> <span class="nav-text">Gradient Descent</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Normal-Equation"><span class="nav-number">6.2.</span> <span class="nav-text">Normal Equation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Python-Sklearn實作方式"><span class="nav-number">7.</span> <span class="nav-text">Python Sklearn實作方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">8.</span> <span class="nav-text">Reference</span></a></li></ol></div>
             
 
           </div>
