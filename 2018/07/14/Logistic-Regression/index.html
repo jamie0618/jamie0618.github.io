@@ -420,7 +420,7 @@
 
       
         <p>本篇介紹 Logistic Regression<br><a id="more"></a></p>
-<h1 id="Generalized-Linear-Model"><a href="#Generalized-Linear-Model" class="headerlink" title="Generalized Linear Model"></a>Generalized Linear Model</h1><p>在前篇文章中 <a href="/2018/07/10/Linear-Regression/" title="Linear-Regression">Linear-Regression</a> 提到線性回歸模型可寫為 :<br>$$ y = w^Tx $$<br>這個線性模型是直接預測逼近y的結果，有沒有辦法令預測值是y的衍生呢? 例如假設預測值是在指數尺度上做變化:<br>$$ ln(y) = w^Tx $$<br>也就是 :<br>$$ y = exp(w^Tx) $$<br>廣義來說，考慮一個可微分的函數 $g()$，令<br>$$ y = g(w^Tx) $$<br>則這樣一個模型就稱為廣義線性模型(generalized linear model)。</p>
+<h1 id="Generalized-Linear-Model"><a href="#Generalized-Linear-Model" class="headerlink" title="Generalized Linear Model"></a>Generalized Linear Model</h1><p>在前篇文章中  提到線性回歸模型可寫為 :<br>$$ y = w^Tx $$<br>這個線性模型是直接預測逼近y的結果，有沒有辦法令預測值是y的衍生呢? 例如假設預測值是在指數尺度上做變化:<br>$$ ln(y) = w^Tx $$<br>也就是 :<br>$$ y = exp(w^Tx) $$<br>廣義來說，考慮一個可微分的函數 $g()$，令<br>$$ y = g(w^Tx) $$<br>則這樣一個模型就稱為廣義線性模型(generalized linear model)。</p>
 <h1 id="Logistic-Regression"><a href="#Logistic-Regression" class="headerlink" title="Logistic Regression"></a>Logistic Regression</h1><p>了解甚麼是廣義線性模型之後，線性回歸模型是直接去逼近我們想預測的 y 值來解決regression問題，那如果我們想解決的問題是分類問題怎麼辦?</p>
 <p>先考慮最基本的 binary classification問題，假設label只有 1、0 兩種值(對應正/反)，也就是屬於和不屬於的差別，相較於線性回歸中直接預測值，這裡想要預測的是屬於這兩種種類的”機率”。</p>
 <p>在線性回歸模型中輸出的是一個實數值 $z (z = w^Tx)$ ，顯然不適合拿來做分類(也可以說因為這邊的 $z$ 的取值範圍在負無限大到無限大，而我們想要的是屬於正/反類別的機率)，因此，我們要做的事將這個實數值 $z$ 轉成 0/1 的值，最理想的是使用一個 unit step function:</p>
@@ -466,8 +466,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/10/Linear-Regression/" rel="next" title="Linear Regression">
-                <i class="fa fa-chevron-left"></i> Linear Regression
+              <a href="/2018/04/27/keras-callbacks/" rel="next" title="Keras Callbacks 紀錄">
+                <i class="fa fa-chevron-left"></i> Keras Callbacks 紀錄
               </a>
             
           </div>
@@ -475,6 +475,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/14/Linear-Regression-1/" rel="prev" title="Linear Regression (Part 1) - Introduction">
+                Linear Regression (Part 1) - Introduction <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -552,7 +556,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -588,7 +592,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">2</span>
+                      
+                    
+                    <span class="site-state-item-count">3</span>
                     <span class="site-state-item-name">tags</span>
                   
                 </div>

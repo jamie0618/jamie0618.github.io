@@ -99,25 +99,27 @@
 
 
 
-  <meta name="description" content="紀錄 Python 中使用 PIL package 做影像前處理的一些常用 function">
-<meta name="keywords" content="Python">
+  <meta name="description" content="Introduction線性迴歸(Linear Regression)利用線性模型，來解決 regression 的問題，屬於監督式學習。">
+<meta name="keywords" content="ML Linear_Regression">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PIL">
-<meta property="og:url" content="http://yoursite.com/2018/05/30/PIL/index.html">
+<meta property="og:title" content="Linear Regression (Part 1) - Introduction">
+<meta property="og:url" content="http://yoursite.com/2018/08/14/Linear-Regression-1/index.html">
 <meta property="og:site_name" content="Melon">
-<meta property="og:description" content="紀錄 Python 中使用 PIL package 做影像前處理的一些常用 function">
+<meta property="og:description" content="Introduction線性迴歸(Linear Regression)利用線性模型，來解決 regression 的問題，屬於監督式學習。">
 <meta property="og:locale" content="zh-tw">
-<meta property="og:updated_time" content="2018-05-30T15:42:31.611Z">
+<meta property="og:image" content="http://yoursite.com/2018/08/14/Linear-Regression-1/1.PNG">
+<meta property="og:updated_time" content="2018-08-14T08:44:19.005Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PIL">
-<meta name="twitter:description" content="紀錄 Python 中使用 PIL package 做影像前處理的一些常用 function">
+<meta name="twitter:title" content="Linear Regression (Part 1) - Introduction">
+<meta name="twitter:description" content="Introduction線性迴歸(Linear Regression)利用線性模型，來解決 regression 的問題，屬於監督式學習。">
+<meta name="twitter:image" content="http://yoursite.com/2018/08/14/Linear-Regression-1/1.PNG">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/30/PIL/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/08/14/Linear-Regression-1/"/>
 
 
 
@@ -127,7 +129,7 @@
   };
 </script>
 
-  <title>PIL | Melon</title>
+  <title>Linear Regression (Part 1) - Introduction | Melon</title>
   
 
 
@@ -309,7 +311,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/30/PIL/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/14/Linear-Regression-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jack Wang">
@@ -326,7 +328,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">PIL
+          <h1 class="post-title" itemprop="name headline">Linear Regression (Part 1) - Introduction
               
             
           </h1>
@@ -345,7 +347,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-30T23:38:40+08:00">2018-05-30</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-14T15:23:53+08:00">2018-08-14</time>
             
 
             
@@ -366,7 +368,7 @@
               
                 <span class="post-meta-item-text">Post modified:</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2018-05-30T23:42:31+08:00">2018-05-30</time>
+              <time title="Post modified" itemprop="dateModified" datetime="2018-08-14T16:44:19+08:00">2018-08-14</time>
             
           </span>
 
@@ -382,7 +384,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Image-Processing/" itemprop="url" rel="index"><span itemprop="name">Image Processing</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ML/" itemprop="url" rel="index"><span itemprop="name">ML</span></a></span>
 
                 
                 
@@ -416,8 +418,19 @@
       
 
       
-        <p>紀錄 Python 中使用 PIL package 做影像前處理的一些常用 function<br><a id="more"></a></p>
-<p># </p>
+        <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>線性迴歸(Linear Regression)利用線性模型，來解決 regression 的問題，屬於監督式學習。</p>
+<a id="more"></a>
+<p>假定原始資料中共有 d 個 feature，即一筆資料 $ x = (x_1, x_2, …, x_d) $ ，則一個最基本的線性模型試圖用一個所有feature的線性組合來描述我們想要預測的目標，在 regression 問題當中，目標是一個連續性的值，例如氣溫、價錢等等。</p>
+<p>$$ f(x) = w_1x_1 + w_2x_2 + … + w_dx_d + b，使得 f(x_i) \simeq y_i $$<br>用向量形式可寫為: $ f(x) = W^Tx + b $<br>其中每一個 $w$ 是每一項特徵的 weight ， $b$ 則是一個數(bias)，所要學習的就是 $w$ 和 $b$ 的值，線性模型較為基礎簡單，但好處是有非常好的可解釋性質，根據每個 feature 對應的 $w$ ，能很好的判斷哪個feature較重要。</p>
+<p>如下圖所示，假設每筆資料包含2個 feature ($x_1, x_2$)，則這兩維度和目標y形成的三維空間中，$f(x) = b + w_1x_1 + w_2x_2$這個線性方程式所形成的線性模型即為一個平面，而我們要的目標是讓這個平面越符合y的分佈越好。</p>
+<p>那要如何判斷分布的好不好?可以看所有資料點的y到這個平面的總距離和，這個距離和越小越好，也就是整體而言更接近我們線性模型表達的超平面，以圖示為例，目的就是找到一個平面能讓圖中的紅線總和有最小值。</p>
+<p><img src="1.PNG" alt=""></p>
+<h1 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h1><p>如何找到一組最適合的參數(weight、bias)來有效的fit資料，主要有兩種方法:</p>
+<ol>
+<li>用 gradient descent 來 minimize cost function，不斷迭代找到最好的組合。</li>
+<li>直接用矩陣的運算找出最佳解(Nomral Equation)。</li>
+</ol>
+<p>兩種方法都能有效找出解，normal equation的好處在於計算迅速、有效率，但只適用於線性迴歸，而 gradient descent 的概念則是在 Logistic Regression、神經網路等等都會使用到。</p>
 
       
     </div>
@@ -438,7 +451,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Python/" rel="tag"># Python</a>
+            <a href="/tags/ML-Linear-Regression/" rel="tag"># ML Linear_Regression</a>
           
         </div>
       
@@ -451,8 +464,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/27/keras-checkpoint/" rel="next" title="Keras 使用 Checkpoint">
-                <i class="fa fa-chevron-left"></i> Keras 使用 Checkpoint
+              <a href="/2018/07/14/Logistic-Regression/" rel="next" title="Logistic Regression">
+                <i class="fa fa-chevron-left"></i> Logistic Regression
               </a>
             
           </div>
@@ -461,8 +474,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/07/10/Linear-Model/" rel="prev" title="Linear Model">
-                Linear Model <i class="fa fa-chevron-right"></i>
+              <a href="/2018/08/14/Linear-Regression-2/" rel="prev" title="Linear Regression (Part 2) - Gradient Descent">
+                Linear Regression (Part 2) - Gradient Descent <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -512,8 +525,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -532,7 +554,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -551,9 +573,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-count">3</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -607,6 +627,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Solution"><span class="nav-number">2.</span> <span class="nav-text">Solution</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -751,24 +787,7 @@
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.1.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.1.0"></script>
 
 
 
@@ -817,6 +836,46 @@
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+    
   
 
 
