@@ -99,22 +99,22 @@
 
 
 
-  <meta name="description" content="Normal Equation (Closed Form Solution)Normal Equation 是利用矩陣的運算來直接求得最佳解，前面的介紹中，模型是由 $w$ 跟 $b$ 係數所構成的線性模型 :$$ f(x) = w^Tx + b $$這邊為了計算方便，將式子中的 b 當作是 w0，而對應的 x0 為1:也就是將 $ f(x) = w_1x_1 + w_2x_2 + … + w_d">
-<meta name="keywords" content="ML Linear_Regression">
+  <meta name="description" content="介紹如何使用 Normal Equation 找出 Linear Regression 的最佳解，以及和 Gradient Descent 的比較。">
+<meta name="keywords" content="ML,Linear_Regression">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linear Regression (Part 3) - Normal Equation">
 <meta property="og:url" content="http://yoursite.com/2018/08/14/Linear-Regression-3/index.html">
 <meta property="og:site_name" content="Melon">
-<meta property="og:description" content="Normal Equation (Closed Form Solution)Normal Equation 是利用矩陣的運算來直接求得最佳解，前面的介紹中，模型是由 $w$ 跟 $b$ 係數所構成的線性模型 :$$ f(x) = w^Tx + b $$這邊為了計算方便，將式子中的 b 當作是 w0，而對應的 x0 為1:也就是將 $ f(x) = w_1x_1 + w_2x_2 + … + w_d">
+<meta property="og:description" content="介紹如何使用 Normal Equation 找出 Linear Regression 的最佳解，以及和 Gradient Descent 的比較。">
 <meta property="og:locale" content="zh-tw">
 <meta property="og:image" content="http://yoursite.com/2018/08/14/Linear-Regression-3/1.PNG">
 <meta property="og:image" content="http://yoursite.com/2018/08/14/Linear-Regression-3/2.PNG">
 <meta property="og:image" content="http://yoursite.com/2018/08/14/Linear-Regression-3/3.PNG">
 <meta property="og:image" content="http://yoursite.com/2018/08/14/Linear-Regression-3/4.PNG">
-<meta property="og:updated_time" content="2018-08-14T17:04:15.643Z">
+<meta property="og:updated_time" content="2018-08-15T15:34:46.098Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linear Regression (Part 3) - Normal Equation">
-<meta name="twitter:description" content="Normal Equation (Closed Form Solution)Normal Equation 是利用矩陣的運算來直接求得最佳解，前面的介紹中，模型是由 $w$ 跟 $b$ 係數所構成的線性模型 :$$ f(x) = w^Tx + b $$這邊為了計算方便，將式子中的 b 當作是 w0，而對應的 x0 為1:也就是將 $ f(x) = w_1x_1 + w_2x_2 + … + w_d">
+<meta name="twitter:description" content="介紹如何使用 Normal Equation 找出 Linear Regression 的最佳解，以及和 Gradient Descent 的比較。">
 <meta name="twitter:image" content="http://yoursite.com/2018/08/14/Linear-Regression-3/1.PNG">
 
 
@@ -371,7 +371,7 @@
               
                 <span class="post-meta-item-text">Post modified:</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2018-08-15T01:04:15+08:00">2018-08-15</time>
+              <time title="Post modified" itemprop="dateModified" datetime="2018-08-15T23:34:46+08:00">2018-08-15</time>
             
           </span>
 
@@ -421,8 +421,8 @@
       
 
       
-        <h1 id="Normal-Equation-Closed-Form-Solution"><a href="#Normal-Equation-Closed-Form-Solution" class="headerlink" title="Normal Equation (Closed Form Solution)"></a>Normal Equation (Closed Form Solution)</h1><p>Normal Equation 是利用矩陣的運算來直接求得最佳解，前面的介紹中，模型是由 $w$ 跟 $b$ 係數所構成的線性模型 :<br>$$ f(x) = w^Tx + b $$<br>這邊為了計算方便，將式子中的 b 當作是 w0，而對應的 x0 為1:<br>也就是將 $ f(x) = w_1x_1 + w_2x_2 + … + w_dx_d + b $<br>改寫為 $ f(x) = w_1x_1 + w_2x_2 + … + w_dx_d + w_0x_0 $ 其中 $w_0=b, x_0=1$<br>而預測的式子寫為 $ f(x) = w^Tx $<br>目標是 minimize $ E(W) = \frac{1}{N} \Vert{XW - y}\Vert^2$<br>(這裡用$E(W)$表示cost function)</p>
-<a id="more"></a>
+        <p>介紹如何使用 Normal Equation 找出 Linear Regression 的最佳解，以及和 Gradient Descent 的比較。<br><a id="more"></a></p>
+<h1 id="Normal-Equation-Closed-Form-Solution"><a href="#Normal-Equation-Closed-Form-Solution" class="headerlink" title="Normal Equation (Closed Form Solution)"></a>Normal Equation (Closed Form Solution)</h1><p>Normal Equation 是利用矩陣的運算來直接求得最佳解，前面的介紹中，模型是由 $w$ 跟 $b$ 係數所構成的線性模型 :<br>$$ f(x) = w^Tx + b $$<br>這邊為了計算方便，將式子中的 b 當作是 w0，而對應的 x0 為1:<br>也就是將 $ f(x) = w_1x_1 + w_2x_2 + … + w_dx_d + b $<br>改寫為 $ f(x) = w_1x_1 + w_2x_2 + … + w_dx_d + w_0x_0 $ 其中 $w_0=b, x_0=1$<br>而預測的式子寫為 $ f(x) = w^Tx $<br>目標是 minimize $ E(W) = \frac{1}{N} \Vert{XW - y}\Vert^2$<br>(這裡用$E(W)$表示cost function)</p>
 <p>要 minimize E(W)，所要找的為 E(W)對W微分等於0的地方，這個地方會出現極小值，所以具體解法就是用矩陣的運算，找出 $\nabla E(W) = 0$ 的解。</p>
 <p><img src="1.PNG" alt=""><br>將E(W)展開之後，將不是W的地方先以A 、 b 、 c三個部分來表示，接著再對W取微分</p>
 <p><img src="2.PNG" alt=""></p>
@@ -472,7 +472,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/ML-Linear-Regression/" rel="tag"># ML Linear_Regression</a>
+            <a href="/tags/ML/" rel="tag"># ML</a>
+          
+            <a href="/tags/Linear-Regression/" rel="tag"># Linear_Regression</a>
           
         </div>
       
@@ -494,6 +496,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/15/Logistic-Regression-1/" rel="prev" title="Logistic Regression (Part 1) - Introduction">
+                Logistic Regression (Part 1) - Introduction <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -600,7 +606,7 @@
                 
                 
                 <div class="site-state-item site-state-tags">
-                  
+                  <a href="/tags/index.html">
                     
                     
                       
@@ -609,9 +615,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">3</span>
+                      
+                    
+                    <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">tags</span>
-                  
+                  </a>
                 </div>
               
             </nav>

@@ -99,19 +99,19 @@
 
 
 
-  <meta name="description" content="Introduction線性迴歸(Linear Regression)利用線性模型，來解決 regression 的問題，屬於監督式學習。">
-<meta name="keywords" content="ML Linear_Regression">
+  <meta name="description" content="介紹線性模型中的 Linear Regression。">
+<meta name="keywords" content="ML,Linear_Regression">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linear Regression (Part 1) - Introduction">
 <meta property="og:url" content="http://yoursite.com/2018/08/14/Linear-Regression-1/index.html">
 <meta property="og:site_name" content="Melon">
-<meta property="og:description" content="Introduction線性迴歸(Linear Regression)利用線性模型，來解決 regression 的問題，屬於監督式學習。">
+<meta property="og:description" content="介紹線性模型中的 Linear Regression。">
 <meta property="og:locale" content="zh-tw">
 <meta property="og:image" content="http://yoursite.com/2018/08/14/Linear-Regression-1/1.PNG">
-<meta property="og:updated_time" content="2018-08-14T08:44:19.005Z">
+<meta property="og:updated_time" content="2018-08-15T15:36:14.114Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linear Regression (Part 1) - Introduction">
-<meta name="twitter:description" content="Introduction線性迴歸(Linear Regression)利用線性模型，來解決 regression 的問題，屬於監督式學習。">
+<meta name="twitter:description" content="介紹線性模型中的 Linear Regression。">
 <meta name="twitter:image" content="http://yoursite.com/2018/08/14/Linear-Regression-1/1.PNG">
 
 
@@ -368,7 +368,7 @@
               
                 <span class="post-meta-item-text">Post modified:</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2018-08-14T16:44:19+08:00">2018-08-14</time>
+              <time title="Post modified" itemprop="dateModified" datetime="2018-08-15T23:36:14+08:00">2018-08-15</time>
             
           </span>
 
@@ -418,8 +418,8 @@
       
 
       
-        <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>線性迴歸(Linear Regression)利用線性模型，來解決 regression 的問題，屬於監督式學習。</p>
-<a id="more"></a>
+        <p>介紹線性模型中的 Linear Regression。<br><a id="more"></a></p>
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>線性迴歸(Linear Regression)利用線性模型，來解決 regression 的問題，屬於監督式學習。</p>
 <p>假定原始資料中共有 d 個 feature，即一筆資料 $ x = (x_1, x_2, …, x_d) $ ，則一個最基本的線性模型試圖用一個所有feature的線性組合來描述我們想要預測的目標，在 regression 問題當中，目標是一個連續性的值，例如氣溫、價錢等等。</p>
 <p>$$ f(x) = w_1x_1 + w_2x_2 + … + w_dx_d + b，使得 f(x_i) \simeq y_i $$<br>用向量形式可寫為: $ f(x) = W^Tx + b $<br>其中每一個 $w$ 是每一項特徵的 weight ， $b$ 則是一個數(bias)，所要學習的就是 $w$ 和 $b$ 的值，線性模型較為基礎簡單，但好處是有非常好的可解釋性質，根據每個 feature 對應的 $w$ ，能很好的判斷哪個feature較重要。</p>
 <p>如下圖所示，假設每筆資料包含2個 feature ($x_1, x_2$)，則這兩維度和目標y形成的三維空間中，$f(x) = b + w_1x_1 + w_2x_2$這個線性方程式所形成的線性模型即為一個平面，而我們要的目標是讓這個平面越符合y的分佈越好。</p>
@@ -451,7 +451,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/ML-Linear-Regression/" rel="tag"># ML Linear_Regression</a>
+            <a href="/tags/ML/" rel="tag"># ML</a>
+          
+            <a href="/tags/Linear-Regression/" rel="tag"># Linear_Regression</a>
           
         </div>
       
@@ -464,8 +466,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/14/Logistic-Regression/" rel="next" title="Logistic Regression">
-                <i class="fa fa-chevron-left"></i> Logistic Regression
+              <a href="/2018/04/27/keras-callbacks/" rel="next" title="Keras Callbacks 紀錄">
+                <i class="fa fa-chevron-left"></i> Keras Callbacks 紀錄
               </a>
             
           </div>
@@ -583,7 +585,7 @@
                 
                 
                 <div class="site-state-item site-state-tags">
-                  
+                  <a href="/tags/index.html">
                     
                     
                       
@@ -592,9 +594,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">3</span>
+                      
+                    
+                    <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">tags</span>
-                  
+                  </a>
                 </div>
               
             </nav>
