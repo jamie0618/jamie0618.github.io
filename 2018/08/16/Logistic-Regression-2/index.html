@@ -99,30 +99,28 @@
 
 
 
-  <meta name="description" content="介紹線性模型中用來處理分類問題的 Logistic Regression。">
+  <meta name="description" content="介紹 Logistic Regression 中如何使用 Gradient Descent 找到最佳解。">
 <meta name="keywords" content="ML,Logistic_Regression">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Logistic Regression (Part 1) - Introduction">
-<meta property="og:url" content="http://yoursite.com/2018/08/15/Logistic-Regression-1/index.html">
+<meta property="og:title" content="Logistic Regression (Part 2) - Gradient Descent">
+<meta property="og:url" content="http://yoursite.com/2018/08/16/Logistic-Regression-2/index.html">
 <meta property="og:site_name" content="Melon">
-<meta property="og:description" content="介紹線性模型中用來處理分類問題的 Logistic Regression。">
+<meta property="og:description" content="介紹 Logistic Regression 中如何使用 Gradient Descent 找到最佳解。">
 <meta property="og:locale" content="zh-tw">
-<meta property="og:image" content="http://yoursite.com/2018/08/15/Logistic-Regression-1/1.PNG">
-<meta property="og:image" content="http://yoursite.com/2018/08/15/Logistic-Regression-1/2.PNG">
-<meta property="og:image" content="http://yoursite.com/2018/08/15/Logistic-Regression-1/3.png">
-<meta property="og:image" content="http://yoursite.com/2018/08/15/Logistic-Regression-1/4.PNG">
-<meta property="og:updated_time" content="2018-08-16T12:38:30.071Z">
+<meta property="og:image" content="http://yoursite.com/2018/08/16/Logistic-Regression-2/1.PNG">
+<meta property="og:image" content="http://yoursite.com/2018/08/16/Logistic-Regression-2/2.png">
+<meta property="og:updated_time" content="2018-08-16T13:01:05.276Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Logistic Regression (Part 1) - Introduction">
-<meta name="twitter:description" content="介紹線性模型中用來處理分類問題的 Logistic Regression。">
-<meta name="twitter:image" content="http://yoursite.com/2018/08/15/Logistic-Regression-1/1.PNG">
+<meta name="twitter:title" content="Logistic Regression (Part 2) - Gradient Descent">
+<meta name="twitter:description" content="介紹 Logistic Regression 中如何使用 Gradient Descent 找到最佳解。">
+<meta name="twitter:image" content="http://yoursite.com/2018/08/16/Logistic-Regression-2/1.PNG">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/08/15/Logistic-Regression-1/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/08/16/Logistic-Regression-2/"/>
 
 
 
@@ -132,7 +130,7 @@
   };
 </script>
 
-  <title>Logistic Regression (Part 1) - Introduction | Melon</title>
+  <title>Logistic Regression (Part 2) - Gradient Descent | Melon</title>
   
 
 
@@ -314,7 +312,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/15/Logistic-Regression-1/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/16/Logistic-Regression-2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jack Wang">
@@ -331,7 +329,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Logistic Regression (Part 1) - Introduction
+          <h1 class="post-title" itemprop="name headline">Logistic Regression (Part 2) - Gradient Descent
               
             
           </h1>
@@ -350,7 +348,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-15T23:27:08+08:00">2018-08-15</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-16T16:23:44+08:00">2018-08-16</time>
             
 
             
@@ -371,7 +369,7 @@
               
                 <span class="post-meta-item-text">Post modified:</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2018-08-16T20:38:30+08:00">2018-08-16</time>
+              <time title="Post modified" itemprop="dateModified" datetime="2018-08-16T21:01:05+08:00">2018-08-16</time>
             
           </span>
 
@@ -421,28 +419,22 @@
       
 
       
-        <p>介紹線性模型中用來處理分類問題的 Logistic Regression。<br><a id="more"></a></p>
-<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>在 Linear Regression 中，線性模型是用來處理 regression 的問題，也就是預測一個連續的數值。</p>
-<p>如果我們想解決的是一個分類問題而不是迴歸問題要如何處理? Logistic Regression 就是用線性模型來解決分類問題的一個方法。</p>
-<p>在 Linear Regression 中提到線性模型可寫為 : $ y = w^Tx $<br>這個線性模型是直接預測逼近y的結果，但如果我們想要逼近的目標是y的衍生呢，例如假設預測值是在指數尺度上做變化:<br>$$ ln(y) = w^Tx $$<br>也就是 :<br>$$ y = exp(w^Tx) $$<br>廣義來說，考慮一個可微分的函數 $g()$，令<br>$$ y = g(w^Tx) $$<br>則這樣一個模型就稱為廣義線性模型(generalized linear model)。</p>
-<p>先考慮最基本的 binary classification 問題，假設 label 只有 1、0 兩種值(對應正/反)，相較於線性回歸中直接預測值，這裡想要預測的是屬於這兩種種類的”機率”。</p>
-<p>在線性回歸模型中輸出的是一個實數值 $z (z = w^Tx)$ ，顯然不適合拿來做分類(也可以說因為這邊的 $z$ 的取值範圍在負無限大到無限大，而我們想要的是屬於正/反類別的機率)，因此，我們要做的事將這個實數值 $z$ 轉成 0/1 的值，最理想的是使用一個 unit step function:</p>
+        <p>介紹 Logistic Regression 中如何使用 Gradient Descent 找到最佳解。<br><a id="more"></a></p>
+<h1 id="Cost-Function-Loss-Function"><a href="#Cost-Function-Loss-Function" class="headerlink" title="Cost Function (Loss Function)"></a>Cost Function (Loss Function)</h1><p>在 Linear Regression 中，使用的 cost function 是 MSE:<br>$$ MSE = \frac{1}{N} \sum_{n=1}^N (f(x_n)-y_n)^2 $$</p>
+<p>但在 Logistic Regression 中是不能用 MSE 來當 cost function的，理由是 Logistic Regression 的線性模型有經過 sigmoid function 的非線性轉換，輸入後得到的 cost function圖形是non-convex的，也就是有許多 local minimum，導致 gradient descent 不能有效運作。<br>(待補充: convex 跟 non-convex 定義及原因?)</p>
 <p><img src="1.PNG" alt=""></p>
-<p>當預測出的值大於0則 y=1，若小於0則 y=0，但 unit step function 是不連續的函數(如下圖紅線所示)，沒辦法作為廣義線性模型的 $g()$，因此我們希望能用另一個函數來逼近 unit step function 達到非常相近的效果，而這個函數就是 logistic function (或稱sigmoid function):</p>
-<p>$$ y = \sigma(z) = \frac{1}{1+e^{-z}} = \frac{1}{1+e^{w^Tx+b}} $$</p>
-<p>通過sigmoid function，我們能把輸出值限制在0~1之間，再藉由以0.5當作分界值，來判斷分類是屬於0還是1，這種方法就稱為 logistic regression (雖然名字中有regression，但實際上解決的是分類問題)。</p>
-<p><img src="2.PNG" alt=""></p>
-<h1 id="Logistic"><a href="#Logistic" class="headerlink" title="Logistic"></a>Logistic</h1><p>logistic function:<br>$$ y = \sigma(z) = \frac{1}{1+e^{-z}} = \frac{1}{1+e^{w^Tx+b}} $$</p>
-<p>這個式子可以改寫為:<br>$$ ln\frac{y}{1-y} = w^Tx + b $$</p>
-<p>在統計學中，odds指的是事件發生的機率與事件不發生的機率之比，而在這邊因為只有正/反兩種選擇，因此假設 y 為此資料點 x 被分為正例的可能性，則 1-y 就是分為反例的可能性，而 $\frac{1}{1-y}$ 就是這種情況下的odds。</p>
-<p>由上述式子可看出，logistic regression其實就是用線性回歸模型的預測方式，只是他所逼近預測的是資料的 “log odds”(也可稱為logit、logistic)。</p>
-<h1 id="Decision-Boundary"><a href="#Decision-Boundary" class="headerlink" title="Decision Boundary"></a>Decision Boundary</h1><p>除了用 odds 的概念去解釋之外， Logistic Regression 的線性模型還可以用 decision boundary 來解釋。</p>
-<p>前面提到這裡使用的線性模型為:<br>$$ y = g(w^Tx) $$<br>其中$g()在這裡即為 sigmoid function$:</p>
-<p>在分母的 $e$ 這項當中，$e^z$的曲線如下圖，其中x軸為$z$，y軸為$e^z$:<br><img src="3.png" alt=""></p>
-<p>$e^{-z}$則是左右相反過來，可以看到以$z=0$為分界，可以把exp過後的值區分為大於1和小於1，再將這個分界代入$g(z)$的式子當中，正好可以發現:</p>
-<p>$$ \begin{cases}<br>g(z) \ge 0.5,  &amp; \text{if} z \ge 0 \\<br>g(z) \lt 0.5,  &amp; \text{if} z \lt 0<br>\end{cases} $$</p>
-<p>從上述式子中可看到 $g(z)$ 這項大於小於0.5正好是我們判斷分類YES/NO的標準，因此這個線性模型在這裡就像是一個 decision boundary，也就是對於 $w^Tx$ 這個超平面來說，大於等於0的地方我們就判斷為 YES，小於0的地方就判斷為 NO。</p>
-<p>如下圖所示，假設線性模型為 $ -3 + x_1 + x_2 $，也就是圖中藍色斜線，則在這條藍色斜線的右上區域即左下區域即可分別判斷為YES/NO。<br><img src="4.PNG" alt=""></p>
+<p>因此，這裡所使用的 cost function 要找一個會讓 cost function 曲線是 convex 的 function。</p>
+<p>首先 Logistic Regression 的模型如下:<br>$$ h(x) = \frac{1}{1+e^{w^Tx+b}} ，h(x)即為預測的y值$$</p>
+<p>而$h(x)$的範圍是界在 1 ~ -1，cost function的設計因此採用的是 sigmoid 的 ln 項:</p>
+<p>$$E(h(x), y) =<br>\begin{cases}<br>-ln(h(x)),  &amp; \text{if $y$ = 1} \\<br>-ln(1-h(x)), &amp; \text{if $y$ = 0}<br>\end{cases}$$</p>
+<p>這個式子畫出來的圖如下圖，對於$y=1$的情況下，隨著$h(x)$越接近1，cost也會越小，反之亦然。<br><img src="2.png" alt=""></p>
+<p>因此將$y=1$和$y=0$兩種情況整合在一起，針對一筆資料的 cost function可寫為:<br>$$ E(h(x), y) =  -[ yln(h(x)) + (1-y)ln(1-h(x)) ]$$</p>
+<p>對於整個資料集:<br>$$ L(w,b) = \frac{-1}{N} \sum_{n=1}^N y_nln(h(x_n)) + (1-y_n)ln(1-h(x_n))$$</p>
+<h1 id="Gradient-Descent"><a href="#Gradient-Descent" class="headerlink" title="Gradient Descent"></a>Gradient Descent</h1><p>計算方式和同 Linear Regression，$W \leftarrow W - \eta*梯度 $</p>
+<p>偏微分的部分如下，首先對於 sigmoid function 的微分:<br>$$ \frac{d}{dx} \sigma(x) = \sigma(x)(1-\sigma(x))$$</p>
+<p>對於整個 cost function :<br>$$ \frac{\partial L}{\partial w_j} =  \frac{1}{N} \sum_{n=1}^N[h(x_n)-y_n]x_{nj}$$<br>(其中$x_{nj}表示第n筆資料中的第j個特徵值$)</p>
+<p>詳細推導過程可以參考 : <a href="https://stats.stackexchange.com/questions/278771/how-is-the-cost-function-from-logistic-regression-derivated" target="_blank" rel="noopener">Logistic Regression 微分推導</a></p>
+<p>剩下的過程跟 Linear Regression 一樣，設定好 learning rate 和迭代輪數不斷更新到梯度為0或是輪數到了為止。</p>
 
       
     </div>
@@ -478,8 +470,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/08/14/Linear-Regression-3/" rel="next" title="Linear Regression (Part 3) - Normal Equation">
-                <i class="fa fa-chevron-left"></i> Linear Regression (Part 3) - Normal Equation
+              <a href="/2018/08/15/Logistic-Regression-1/" rel="next" title="Logistic Regression (Part 1) - Introduction">
+                <i class="fa fa-chevron-left"></i> Logistic Regression (Part 1) - Introduction
               </a>
             
           </div>
@@ -487,10 +479,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/08/16/Logistic-Regression-2/" rel="prev" title="Logistic Regression (Part 2) - Gradient Descent">
-                Logistic Regression (Part 2) - Gradient Descent <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -653,7 +641,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Logistic"><span class="nav-number">2.</span> <span class="nav-text">Logistic</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Decision-Boundary"><span class="nav-number">3.</span> <span class="nav-text">Decision Boundary</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Cost-Function-Loss-Function"><span class="nav-number">1.</span> <span class="nav-text">Cost Function (Loss Function)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Gradient-Descent"><span class="nav-number">2.</span> <span class="nav-text">Gradient Descent</span></a></li></ol></div>
             
 
           </div>
